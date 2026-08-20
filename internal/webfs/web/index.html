@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>结构荷载规范合规引擎</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <h1>建筑结构荷载规范合规引擎</h1>
+  <p class="sub">项目 · 楼层 · 构件 · 荷载工况 · 荷载组合 · 充分性检查 · 重启恢复</p>
+</header>
+<main>
+  <section id="projects">
+    <h2>项目 <button id="new-project">+ 新建项目</button></h2>
+    <ul id="project-list"></ul>
+  </section>
+  <section id="detail" hidden>
+    <h2 id="detail-title"></h2>
+    <div class="grid">
+      <div>
+        <h3>楼层</h3>
+        <button id="add-level">+ 楼层</button>
+        <ul id="level-list"></ul>
+      </div>
+      <div>
+        <h3>构件</h3>
+        <button id="add-component">+ 构件</button>
+        <ul id="component-list"></ul>
+      </div>
+    </div>
+    <div class="grid">
+      <div>
+        <h3>荷载工况</h3>
+        <div id="loadcase-area"><button id="pick-component-lc" disabled>选择构件后录入工况</button></div>
+        <ul id="loadcase-list"></ul>
+      </div>
+      <div>
+        <h3>荷载组合</h3>
+        <button id="add-combo">+ 组合</button>
+        <ul id="combo-list"></ul>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="derive">派生风/雪/折减活载</button>
+      <button id="run-checks">运行检查</button>
+      <button id="recompute">重启重算 (ReconcileAll)</button>
+      <button id="audit">一致性审计</button>
+    </div>
+    <h3>充分性检查</h3>
+    <table id="check-table">
+      <thead><tr><th>构件</th><th>组合</th><th>需求M(0.01kN·m)</th><th>承载力M</th><th>UR(0.01)</th><th>状态</th><th>控制</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div class="summary">
+      <h3>合规摘要</h3>
+      <pre id="summary-box"></pre>
+    </div>
+    <div>
+      <h3>调整 (Override)</h3>
+      <input id="ovr-comp" placeholder="构件id" style="width:120px">
+      <input id="ovr-field" placeholder="字段 nominal_moment" style="width:180px">
+      <input id="ovr-val" placeholder="新值" style="width:120px">
+      <input id="ovr-reason" placeholder="原因" style="width:200px">
+      <button id="ovr-go">应用并重算</button>
+    </div>
+  </section>
+</main>
+<dialog id="dlg"><form id="dlg-form" method="dialog"></form></dialog>
+<script src="/app.js"></script>
+</body>
+</html>
