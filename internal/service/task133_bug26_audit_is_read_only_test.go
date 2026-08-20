@@ -1,0 +1,3 @@
+package service
+import("context";"path/filepath";"testing";"task133-structload/internal/clock";"task133-structload/internal/store")
+func TestBug26_AuditDoesNotAppendLifecycleEvents(t *testing.T){st,e:=store.Open(filepath.Join(t.TempDir(),"a.db"));if e!=nil{t.Fatal(e)};defer st.Close();svc:=New(st,clock.Real{});ctx:=context.Background();p,e:=svc.CreateProject(ctx,CreateProjectInput{Code:"P-26",Name:"audit",Exposure:"C",Importance:"II",WindSpeed:380});if e!=nil{t.Fatal(e)};before,_:=svc.ListEvents(ctx,p.ID);if _,e=svc.Audit(ctx,p.ID);e!=nil{t.Fatal(e)};after,_:=svc.ListEvents(ctx,p.ID);if len(after)!=len(before){t.Fatalf("audit changed event count %d -> %d",len(before),len(after))}}

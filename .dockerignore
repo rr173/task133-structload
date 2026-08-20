@@ -1,0 +1,13 @@
+# Build context: exclude anything that would inflate or taint the image.
+# Dependencies are fetched inside the image with Go module mode.
+.git
+.gitignore
+*.db
+*.db-shm
+*.db-wal
+structload
+structload-build
+/tmp
+node_modules
+dist
+vendor
